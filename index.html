@@ -1,0 +1,177 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b16" />
+  <meta name="description" content="Asmit Kumar Mishra — Computer Science student, developer, and builder of practical projects." />
+  <title>Asmit Kumar Mishra | Developer Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root{--bg:#090b16;--panel:#111528;--panel2:#151b31;--text:#f4f6ff;--muted:#a4acc5;--line:rgba(180,190,255,.15);--purple:#a78bfa;--cyan:#67e8f9;--pink:#f0abfc;--green:#86efac;--max:1120px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;line-height:1.65;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(ellipse at 15% 8%,rgba(124,58,237,.20),transparent 34%),radial-gradient(ellipse at 90% 32%,rgba(6,182,212,.12),transparent 32%),radial-gradient(ellipse at 50% 100%,rgba(219,39,119,.09),transparent 35%)}
+    a{color:inherit;text-decoration:none}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+    .nav{position:sticky;top:0;z-index:20;background:rgba(9,11,22,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:800;letter-spacing:-.7px}.brand span{color:var(--cyan)}
+    .links{display:flex;gap:25px;align-items:center;color:var(--muted);font-size:.88rem}.links a:hover{color:var(--cyan)}.menu{display:none;background:none;color:white;border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+    .hero{min-height:690px;display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:55px;padding:90px 0 80px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid rgba(103,232,249,.25);border-radius:99px;color:var(--cyan);font: .75rem 'DM Mono',monospace;letter-spacing:.5px;background:rgba(103,232,249,.06)}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+    h1{font-size:clamp(3.1rem,7vw,6.4rem);line-height:.99;letter-spacing:-5px;margin:27px 0 24px;font-weight:800}
+    .gradient{background:linear-gradient(100deg,var(--purple),var(--cyan) 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:1.08rem;color:var(--muted);max-width:650px}.actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:32px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 19px;border-radius:12px;font-weight:800;font-size:.9rem;border:1px solid var(--line);transition:.2s}
+    .btn.primary{background:linear-gradient(110deg,#8b5cf6,#0891b2);border:0;color:white;box-shadow:0 10px 35px rgba(124,58,237,.22)}.btn:hover{transform:translateY(-3px);border-color:var(--cyan)}
+    .hero-card{position:relative;border:1px solid var(--line);border-radius:28px;padding:25px;background:linear-gradient(145deg,rgba(21,27,49,.95),rgba(12,16,31,.85));box-shadow:0 25px 80px rgba(0,0,0,.3);transform:rotate(2deg)}
+    .hero-card:before{content:"";position:absolute;inset:-1px;border-radius:28px;padding:1px;background:linear-gradient(140deg,rgba(167,139,250,.65),transparent 45%,rgba(103,232,249,.5));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .code-top{display:flex;gap:7px;margin-bottom:22px}.code-top i{width:9px;height:9px;border-radius:50%;background:#fb7185}.code-top i:nth-child(2){background:#facc15}.code-top i:nth-child(3){background:#86efac}
+    .code{font: .83rem/2 'DM Mono',monospace;color:#c4cbe2}.code .key{color:var(--purple)}.code .str{color:var(--green)}.code .fn{color:var(--cyan)}
+    .orbit{height:160px;display:grid;place-items:center;position:relative;margin:4px 0 14px}.orbit-ring{position:absolute;width:145px;height:145px;border:1px dashed rgba(103,232,249,.45);border-radius:50%;animation:spin 18s linear infinite}.orbit-ring:after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:var(--pink);top:18px;left:10px;box-shadow:0 0 20px var(--pink)}
+    .orbit-core{width:95px;height:95px;border-radius:26px;display:grid;place-items:center;font-size:2.2rem;background:linear-gradient(145deg,#8b5cf6,#0891b2);box-shadow:0 0 55px rgba(103,232,249,.25);transform:rotate(-8deg)}
+    @keyframes spin{to{transform:rotate(360deg)}}.mini-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}.tag{font: .7rem 'DM Mono',monospace;padding:7px 10px;border:1px solid var(--line);border-radius:8px;color:#cbd5e1;background:rgba(255,255,255,.025)}
+    section{padding:85px 0;scroll-margin-top:75px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:34px}.kicker{color:var(--cyan);font: .74rem 'DM Mono',monospace;text-transform:uppercase;letter-spacing:2px}
+    h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-1.8px;margin:9px 0 0}.sub{color:var(--muted);max-width:520px;margin:0}
+    .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}.panel{border:1px solid var(--line);border-radius:20px;padding:27px;background:linear-gradient(145deg,rgba(21,27,49,.78),rgba(14,18,34,.8))}
+    .panel p{color:var(--muted);margin:0}.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fact{padding:17px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}.fact strong{display:block;font-size:1.05rem}.fact span{font-size:.78rem;color:var(--muted)}
+    .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.project{position:relative;overflow:hidden;min-height:290px}.project:after{content:"";position:absolute;width:180px;height:180px;right:-65px;top:-70px;border-radius:50%;background:rgba(167,139,250,.12);filter:blur(2px)}.project:nth-child(2):after{background:rgba(103,232,249,.12)}
+    .project-icon{width:49px;height:49px;border-radius:14px;display:grid;place-items:center;font-size:1.4rem;background:rgba(167,139,250,.13);border:1px solid rgba(167,139,250,.25);margin-bottom:20px}.project h3{font-size:1.35rem;margin:0 0 9px}.project p{color:var(--muted);font-size:.93rem;max-width:480px}.project .mini-tags{margin-top:22px}.project-link{display:inline-flex;margin-top:20px;color:var(--cyan);font-weight:800;font-size:.85rem}
+    .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.skill-card h3{margin:0 0 15px;font-size:1rem}.skill-list{display:flex;flex-wrap:wrap;gap:8px}.skill-list span{padding:7px 10px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-size:.78rem;color:#d5d9e9}
+    .timeline{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.timeline-item{display:flex;gap:16px}.timeline-icon{flex:0 0 42px;height:42px;border-radius:13px;display:grid;place-items:center;background:rgba(103,232,249,.09);border:1px solid rgba(103,232,249,.2)}.timeline-item h3{margin:0 0 5px;font-size:1rem}.timeline-item p{margin:0;color:var(--muted);font-size:.88rem}
+    .cta{border:1px solid rgba(167,139,250,.28);border-radius:24px;padding:42px;background:linear-gradient(115deg,rgba(124,58,237,.17),rgba(8,145,178,.11));display:flex;justify-content:space-between;align-items:center;gap:25px}.cta p{color:var(--muted);margin:10px 0 0}
+    footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}.reveal.show{opacity:1;transform:translateY(0)}
+    @media(max-width:800px){.hero{grid-template-columns:1fr;min-height:auto;padding:75px 0}.hero-card{max-width:500px;width:100%;margin:0 auto}.about-grid{grid-template-columns:1fr}.skills{grid-template-columns:1fr 1fr}.links{display:none;position:absolute;top:72px;left:0;right:0;background:#0d1020;padding:20px;flex-direction:column;border-bottom:1px solid var(--line)}.links.open{display:flex}.menu{display:block}}
+    @media(max-width:560px){.wrap{width:min(100% - 30px,var(--max))}h1{letter-spacing:-3px}.project-grid,.skills,.timeline{grid-template-columns:1fr}.section-head{display:block}.section-head .sub{margin-top:13px}.cta{display:block;padding:28px}.cta .btn{margin-top:20px}section{padding:65px 0}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#home">ASMIT<span>.</span></a>
+      <nav class="links" id="navLinks">
+        <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+      </nav>
+      <button class="menu" id="menuBtn" aria-label="Toggle navigation">Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="home">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> OPEN TO LEARNING & COLLABORATION</div>
+        <h1>Hi, I'm<br><span class="gradient">Asmit Mishra.</span></h1>
+        <p class="lead">A Computer Science student and aspiring developer who enjoys turning ideas into useful digital experiences. I’m learning by building, experimenting, and collaborating.</p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">Explore my work <span>↗</span></a>
+          <a class="btn" href="https://github.com/asmitkumarmishra005" target="_blank" rel="noopener">GitHub profile ↗</a>
+        </div>
+        <div class="mini-tags"><span class="tag">Computer Science</span><span class="tag">Problem solving</span><span class="tag">Building in public</span></div>
+      </div>
+      <div class="hero-card" aria-label="Developer profile card">
+        <div class="code-top"><i></i><i></i><i></i></div>
+        <div class="orbit"><div class="orbit-ring"></div><div class="orbit-core">⌘</div></div>
+        <div class="code">
+          <div><span class="key">const</span> developer = {</div>
+          <div>&nbsp;&nbsp;name: <span class="str">"Asmit Mishra"</span>,</div>
+          <div>&nbsp;&nbsp;focus: <span class="str">"Building & learning"</span>,</div>
+          <div>&nbsp;&nbsp;mindset: <span class="str">"Keep exploring"</span>,</div>
+          <div>&nbsp;&nbsp;status: <span class="fn">"Creating"</span></div>
+          <div>};</div>
+        </div>
+        <div class="mini-tags"><span class="tag">Curious mind</span><span class="tag">Developer</span><span class="tag">Student</span></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker">01 / A little about me</div><h2>Curiosity into creation.</h2></div><p class="sub">I believe the best way to learn technology is to use it to solve real problems.</p></div>
+        <div class="about-grid">
+          <div class="panel reveal"><p>I’m Asmit Kumar Mishra, a Computer Science student at Heritage Institute of Technology, Kolkata. I’m exploring software development and emerging technologies while strengthening my fundamentals. I enjoy working on ideas with a practical purpose, learning from developer communities, and improving through hands-on projects.</p><br><p>Right now, my focus is on growing as a well-rounded developer: understanding the fundamentals, building projects, and learning how to work effectively with others.</p></div>
+          <div class="facts reveal">
+            <div class="fact"><strong>HIT Kolkata</strong><span>Current institute</span></div>
+            <div class="fact"><strong>CSE – Data Science</strong><span>Academic programme</span></div>
+            <div class="fact"><strong>2 Projects</strong><span>Featured work</span></div>
+            <div class="fact"><strong>10 Badges</strong><span>Google Cloud Skills Boost</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker">02 / Selected work</div><h2>Things I've built.</h2></div><p class="sub">A couple of projects where I explored how technology can support people and solve practical challenges.</p></div>
+        <div class="project-grid">
+          <article class="panel project reveal">
+            <div class="project-icon">🌱</div><div class="kicker">COMMUNITY / SOCIAL IMPACT</div>
+            <h3>AnnSetu</h3>
+            <p>An NGO-focused platform concept designed around connecting people with community support. The project gave me experience translating a social-impact idea into a web experience.</p>
+            <div class="mini-tags"><span class="tag">Web project</span><span class="tag">Social impact</span><span class="tag">UI / UX</span></div>
+            <a class="project-link" href="https://github.com/asmitkumarmishra005" target="_blank" rel="noopener">Explore on GitHub ↗</a>
+          </article>
+          <article class="panel project reveal">
+            <div class="project-icon">⚖️</div><div class="kicker">HACKATHON / PROBLEM SOLVING</div>
+            <h3>MaanakSetu</h3>
+            <p>A Legal Metrology-focused project exploring how digital tools can make standards and consumer-facing information more accessible. Built as a practical problem-solving project.</p>
+            <div class="mini-tags"><span class="tag">Legal Metrology</span><span class="tag">Problem solving</span><span class="tag">Project build</span></div>
+            <a class="project-link" href="https://github.com/asmitkumarmishra005" target="_blank" rel="noopener">Explore on GitHub ↗</a>
+          </article>
+        </div>
+        <p style="color:var(--muted);font-size:.8rem;margin-top:16px">Project links currently point to your GitHub profile. Replace them with individual repository URLs when ready.</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker">03 / My toolkit</div><h2>Learning, building, improving.</h2></div><p class="sub">A growing toolkit. This section is intentionally easy to update as your skills develop.</p></div>
+        <div class="skills">
+          <div class="panel skill-card reveal"><h3>Programming</h3><div class="skill-list"><span>C++</span><span>Python</span><span>JavaScript</span></div></div>
+          <div class="panel skill-card reveal"><h3>Web & Tools</h3><div class="skill-list"><span>HTML</span><span>CSS</span><span>Git</span><span>GitHub</span><span>VS Code</span></div></div>
+          <div class="panel skill-card reveal"><h3>Exploring</h3><div class="skill-list"><span>Data Science</span><span>Cloud</span><span>DSA</span><span>Software Development</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker">04 / Beyond the code</div><h2>Learning with community.</h2></div><p class="sub">Technology grows faster when we learn, share, and build together.</p></div>
+        <div class="timeline">
+          <div class="panel timeline-item reveal"><div class="timeline-icon">☁️</div><div><h3>Google Cloud Skills Boost</h3><p>Completed a learning campaign and earned 10 skill badges through hands-on cloud labs and guided tasks.</p></div></div>
+          <div class="panel timeline-item reveal"><div class="timeline-icon">✳</div><div><h3>GDG on Campus — HITK</h3><p>Engaging with the Google Developer Groups on Campus community and exploring developer tools, events, and collaborative learning.</p></div></div>
+          <div class="panel timeline-item reveal"><div class="timeline-icon">🎓</div><div><h3>Heritage Institute of Technology</h3><p>Studying Computer Science with a Data Science focus and building a strong technical foundation.</p></div></div>
+          <div class="panel timeline-item reveal"><div class="timeline-icon">🚀</div><div><h3>Build. Learn. Repeat.</h3><p>Turning ideas into projects, learning from feedback, and steadily expanding my technical skills.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="cta reveal">
+          <div><div class="kicker">05 / Let's connect</div><h2>Have an idea? Let's build.</h2><p>I'm interested in learning opportunities, meaningful projects, and connecting with fellow developers.</p></div>
+          <a class="btn primary" href="https://github.com/asmitkumarmishra005" target="_blank" rel="noopener">Find me on GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><span>© <span id="year"></span> Asmit Kumar Mishra</span><span>Designed with curiosity & a little bit of code.</span><a href="#home">Back to top ↑</a></div></footer>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
+'''
+path = Path("/mnt/data/asmit_portfolio.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created {path} ({path.stat().st_size:,} bytes)")
